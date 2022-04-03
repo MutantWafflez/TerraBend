@@ -8,6 +8,8 @@ namespace TerraBend.Common.GlobalNPCs {
     /// GlobalNPC that handles the triggering of element unlocking for avatar players
     /// when specific bosses are unlocked.
     /// </summary>
+    //TODO: Add this functionality properly
+    [Autoload(false)]
     public class ElementUnlockerGlobalNPC : GlobalNPC {
         public override void OnKill(NPC npc) {
             if (Main.netMode == NetmodeID.SinglePlayer) {
