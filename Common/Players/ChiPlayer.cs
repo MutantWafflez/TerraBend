@@ -7,6 +7,19 @@ namespace TerraBend.Common.Players {
     /// ModPlayer that exclusively handles the "Chi" resource, which essentially determines the threshold
     /// by which the player can attack; i.e, certain moves require that your "Chi" be high enough.
     /// </summary>
+    /// <remarks>
+    /// In more detail, Chi isn't quite like Mana for mages: there are some distinct differences. Each of the three "parts" of Chi have unique
+    /// purposes. The player's current Chi value (<seealso cref="currentChi"/>) under normal circumstances is going to be whatever the Max Chi
+    /// value is. However, the current Chi value, unlike Mana, will not be decreased by using normal bending moves; it can only be decreased by
+    /// certain (enemy) attacks or one-time circumstances. The Current chi value regenerates VERY slowly, and has no "instant regen" method like
+    /// mana/health potions. As for the Base Max Chi value (<seealso cref="baseMaxChi"/>) is the simplest of the three "parts", it's the saved,
+    /// base max value of Chi. If the player's current Chi value falls below 50% of the base Max Chi, the player will be unable to use ANY bending
+    /// moves until that threshold is passed again. Finally, the last "part" is the DISPLAYED max value (<seealso cref="displayedMaxChi"/>) of Chi;
+    /// this value is reset to the base max Chi every tick, the current Chi value cannot pass this value. Some bending moves, as a side effect, will
+    /// decrease this value (for example, summoning a persistent ball of flame). If the current Chi value falls below 70% of the DISPLAYED max chi
+    /// value, then bending moves will lose 2% damage (additive) for each % below that threshold. For example, if the current Chi value is at 50% of
+    /// the DISPLAYED max value, then bending moves will lose 40% damage.
+    /// </remarks>
     public class ChiPlayer : ModPlayer {
         /// <summary>
         /// The current chi value, out of the max.
