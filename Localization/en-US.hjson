@@ -1,0 +1,41 @@
+﻿Mods: {
+	TerraBend: {
+		ElementNames: {
+			Fire: "Fire"
+			Air: "Air"
+			Water: "Water"
+			Earth: "Earth"
+		}
+
+		ElementKeybindInfo: {
+			Fire: "Enter/Exit Fire-bending Stance"
+			Air: "Enter/Exit Air-bending Stance"
+			Water: "Enter/Exit Water-bending Stance"
+			Earth: "Enter/Exit Earth-bending Stance"
+		}
+
+		DamageClassName: {
+			BendingDamageClass: "bending damage"
+			FireDamageClass: "fire-bending damage"
+			AirDamageClass: "air-bending damage"
+			WaterDamageClass: "water-bending damage"
+			EarthDamageClass: "earth-bending damage"
+		}
+
+		Common: {
+			Avatar: "Avatar"
+			UndecidedAlignment: "Undecided"
+		}
+
+		MiscTooltips: {
+			HotbarAssignmentTip: "Press a hotbar keybind to place this move into said slot"
+		}
+
+		InfoText: {
+			UnlockedNewElement: "You have unlocked the element of {0}!"
+			EnteringBendingStanceWithItem: "You cannot enter a bending stance with an item in your hand!"
+			TryingToEnterNonAlignedElement: "You must be an Avatar to use elements other than your alignment!"
+			TryingToEnterLockedElement: "You have yet to unlock the element of {0}!"
+		}
+	}
+}

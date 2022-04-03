@@ -1,0 +1,4 @@
+displayName = Terraria: The Last Earthbender
+author = MutantWafflez
+version = 0.1
+buildIgnore = *.csproj, *.user, obj\*, bin\*, .vs\*, .idea\*, *.md
