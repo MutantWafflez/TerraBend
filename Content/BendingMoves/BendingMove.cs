@@ -25,7 +25,7 @@ namespace TerraBend.Content.BendingMoves {
         public override void AutoDefaults() {
             base.AutoDefaults();
             Item.DamageType = ModContent.GetInstance<BendingDamageClass>();
-            Item.crit = 0;
+            Item.crit = -100;
         }
 
         public override bool CanRightClick() => TerraBend.IsDebug;

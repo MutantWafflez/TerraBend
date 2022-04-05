@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq;
+using Microsoft.Xna.Framework;
 using Terraria.ModLoader;
 
 namespace TerraBend.Common.Players {
@@ -150,6 +151,10 @@ namespace TerraBend.Common.Players {
             }
 
             _negativeJing = (int)MathHelper.Clamp(_negativeJing, 0f, MaxJing);
+        }
+
+        public void AttemptJingPurge() {
+            //TODO: Write Jing Purge
         }
     }
 }
