@@ -7,6 +7,14 @@
 			Earth: "Earth"
 		}
 
+		JingStatus: {
+			Positive: "Positive"
+			Neutral: "Neutral"
+			Negative: "Negative"
+			Unaligned: "Unaligned"
+			Balanced: "Balanced"
+		}
+
 		ElementKeybindInfo: {
 			Fire: "Enter/Exit Fire-bending Stance"
 			Air: "Enter/Exit Air-bending Stance"
@@ -23,6 +31,7 @@
 		}
 
 		Common: {
+			Majority: "Majority"
 			Avatar: "Avatar"
 			UndecidedAlignment: "Undecided"
 		}

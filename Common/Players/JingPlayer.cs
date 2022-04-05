@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
+using TerraBend.Custom.Enums;
 using Terraria.ModLoader;
 
 namespace TerraBend.Common.Players {
@@ -151,6 +153,42 @@ namespace TerraBend.Common.Players {
             }
 
             _negativeJing = (int)MathHelper.Clamp(_negativeJing, 0f, MaxJing);
+        }
+
+        /// <summary>
+        /// Gets and returns the current Positive Jing value.
+        /// </summary>
+        public int GetPositiveJing() => _positiveJing;
+
+        /// <summary>
+        /// Gets and returns the current Neutral Jing value.
+        /// </summary>
+        public int GetNeutralJing() => _neutralJing;
+
+        /// <summary>
+        /// Gets and returns the current Negative Jing value.
+        /// </summary>
+        public int GetNegativeJing() => _negativeJing;
+
+        /// <summary>
+        /// Calculates and returns the current "Majority Type" of Jing.
+        /// </summary>
+        public JingMajorityType GetMajorityJing() {
+            if (_positiveJing == _neutralJing && _positiveJing == _negativeJing && UnalignedJing == 0) {
+                return JingMajorityType.Balanced;
+            }
+            else if (UnalignedJing > _positiveJing && UnalignedJing > _neutralJing && UnalignedJing > _negativeJing) {
+                return JingMajorityType.Unaligned;
+            }
+            else {
+                return new Tuple<JingMajorityType, int>[] {
+                        new Tuple<JingMajorityType, int>(JingMajorityType.Positive, _positiveJing),
+                        new Tuple<JingMajorityType, int>(JingMajorityType.Neutral, _neutralJing),
+                        new Tuple<JingMajorityType, int>(JingMajorityType.Negative, _negativeJing)
+                    }.OrderByDescending(tuple => tuple.Item2)
+                     .First()
+                     .Item1;
+            }
         }
 
         public void AttemptJingPurge() {
