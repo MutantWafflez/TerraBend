@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Xna.Framework;
 using TerraBend.Common.MiscLoadables;
 using TerraBend.Common.Players;
 using TerraBend.Content.DamageClasses;
@@ -60,6 +61,13 @@ namespace TerraBend.Content.BendingMoves {
             return null;
         }
 
+        public override bool CanRightClick() => TerraBend.IsDebug;
+
+        public override void RightClick(Player player) {
+            //Add item to each applicable inventory when right clicked in a default inventory
+            player.GetModPlayer<BendingStancePlayer>().learnedMoves[BendingMoveType].Add(Item.Clone());
+        }
+
         public override void AutoDefaults() {
             base.AutoDefaults();
             Item.DamageType = ModContent.GetInstance<BendingDamageClass>();
@@ -68,11 +76,11 @@ namespace TerraBend.Content.BendingMoves {
             jingCreationAmount = 0;
         }
 
-        public override bool CanRightClick() => TerraBend.IsDebug;
+        public override void ModifyWeaponDamage(Player player, ref StatModifier damage, ref float flat) {
+            ChiPlayer chiPlayer = player.GetModPlayer<ChiPlayer>();
 
-        public override void RightClick(Player player) {
-            //Add item to each applicable inventory when right clicked in a default inventory
-            player.GetModPlayer<BendingStancePlayer>().learnedMoves[BendingMoveType].Add(Item.Clone());
+            //For every % below 70% of the displayed max chi value, lose 2% damage
+            damage -= MathHelper.Clamp(0.02f * ((1f - chiPlayer.currentChi / (float)chiPlayer.displayedMaxChi) * 100f - 30f), 0f, 1f);
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
