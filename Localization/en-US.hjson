@@ -15,6 +15,13 @@
 			Balanced: "Balanced"
 		}
 
+		FullJingName: {
+			Positive: "Positive Jing"
+			Neutral: "Neutral Jing"
+			Negative: "Negative Jing"
+			Unaligned: "Unaligned Jing"
+		}
+
 		ElementKeybindInfo: {
 			Fire: "Enter/Exit Fire-bending Stance"
 			Air: "Enter/Exit Air-bending Stance"
@@ -38,6 +45,7 @@
 
 		MiscTooltips: {
 			HotbarAssignmentTip: "Press a hotbar keybind to place this move into said slot"
+			JingCreationTip: "Generates {0} {1}"
 		}
 
 		InfoText: {
@@ -57,10 +65,10 @@
 				NegativeJingColorLabel: "Negative Jing Color"
 				UnalignedJingColorLabel: "Unaligned Jing Color"
 
-				PositiveJingColorTooltip: "Changes the color representation of \'Positive Jing\' in UIs and any other applicable places."
-				NeutralJingColorTooltip: "Changes the color representation of \'Neutral Jing\' in UIs and any other applicable places."
-				NegativeJingColorTooltip: "Changes the color representation of \'Negative Jing\' in UIs and any other applicable places."
-				UnalignedJingColorTooltip: "Changes the color representation of \'Unaligned Jing\' in UIs and any other applicable places."
+				PositiveJingColorTooltip: "Changes the color representation of \'{$Mods.TerraBend.FullJingName.Positive}\' in UIs and any other applicable places."
+				NeutralJingColorTooltip: "Changes the color representation of \'{$Mods.TerraBend.FullJingName.Neutral}\' in UIs and any other applicable places."
+				NegativeJingColorTooltip: "Changes the color representation of \'{$Mods.TerraBend.FullJingName.Negative}\' in UIs and any other applicable places."
+				UnalignedJingColorTooltip: "Changes the color representation of \'{$Mods.TerraBend.FullJingName.Unaligned}\' in UIs and any other applicable places."
 			}
 		}
 	}

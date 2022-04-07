@@ -12,6 +12,8 @@ namespace TerraBend.Content.BendingMoves.FireMoves {
         public override void SetDefaults() {
             Item.CloneDefaults(ItemID.Flamelash);
             Item.DamageType = ModContent.GetInstance<FireDamageClass>();
+            jingCreationType = JingType.Positive;
+            jingCreationAmount = 4;
         }
     }
 }

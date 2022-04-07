@@ -51,7 +51,7 @@ namespace TerraBend.Common.Players {
         }
 
         public override void Initialize() {
-            baseMaxChi = displayedMaxChi = DefaultMaxChi;
+            currentChi = baseMaxChi = displayedMaxChi = DefaultMaxChi;
         }
 
         public override void SaveData(TagCompound tag) {
@@ -59,7 +59,8 @@ namespace TerraBend.Common.Players {
         }
 
         public override void LoadData(TagCompound tag) {
-            baseMaxChi = tag.ContainsKey("maxChi") ? tag.GetInt("maxChi") : DefaultMaxChi;
+            displayedMaxChi = baseMaxChi = tag.ContainsKey("maxChi") ? tag.GetInt("maxChi") : DefaultMaxChi;
+            currentChi = displayedMaxChi;
         }
     }
 }
