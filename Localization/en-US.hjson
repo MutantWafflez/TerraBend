@@ -39,6 +39,7 @@
 
 		Common: {
 			Majority: "Majority"
+			Chi: "Chi"
 			Avatar: "Avatar"
 			UndecidedAlignment: "Undecided"
 		}
