@@ -17,6 +17,7 @@ namespace TerraBend.Content.UI.Elements {
         private Asset<Texture2D> _frameEdge;
         private Asset<Texture2D> _frameMiddle;
         private Asset<Texture2D> _frameInner;
+        private Asset<Texture2D> _frameInnerBack;
 
         /// <summary>
         /// Denominator value that determines the size of each individual "bar" piece.
@@ -30,6 +31,7 @@ namespace TerraBend.Content.UI.Elements {
             _frameEdge = ModContent.Request<Texture2D>(chiPath + "ChiFrameEdge", AssetRequestMode.ImmediateLoad);
             _frameMiddle = ModContent.Request<Texture2D>(chiPath + "ChiFrameMiddle", AssetRequestMode.ImmediateLoad);
             _frameInner = ModContent.Request<Texture2D>(chiPath + "ChiFrameInner");
+            _frameInnerBack = ModContent.Request<Texture2D>(chiPath + "ChiFrameInnerBack");
 
             Width.Set(_frameEdge.Width() * 2 + _frameMiddle.Width() * 2, 0f);
             Height.Set(_frameEdge.Height(), 0f);
@@ -61,8 +63,11 @@ namespace TerraBend.Content.UI.Elements {
                 0f
             );
 
-            //Draw bar representing the opposing chi values
-            //(do that here)
+            //Draw inner back bar
+            DrawingUtils.DrawBar(spriteBatch, elementDrawPos + new Vector2(edgeDims.X, 4f), middlePartCount, _frameInnerBack);
+
+            //Draw actual chi value
+            DrawingUtils.DrawBar(spriteBatch, elementDrawPos + new Vector2(edgeDims.X, 4f), chiPlayer.currentChi / _barSizeDenomination, _frameInner);
 
             //Draw "middle" line (to represent point where bending dies)
             //Note this line isn't always in the middle, it usually is unless displayedMaxChi > baseMaxChi
@@ -71,6 +76,15 @@ namespace TerraBend.Content.UI.Elements {
                 null,
                 Color.Red
             );
+
+            //Draw "lowered" line if displayedMaxChi < baseMaxChi, which represents the upper bound for the current chi
+            if (chiPlayer.displayedMaxChi < chiPlayer.baseMaxChi) {
+                spriteBatch.Draw(TextureAssets.MagicPixel.Value,
+                    new Rectangle((int)(elementDrawPos.X + edgeDims.X + middleDims.X * (chiPlayer.displayedMaxChi / _barSizeDenomination)), (int)(elementDrawPos.Y + 2f), 2, (int)(middleDims.Y - 4)),
+                    null,
+                    Color.Yellow
+                );
+            }
 
             //Update size
             Width.Set(edgeDims.X * 2 + middleDims.X * middlePartCount, 0f);
