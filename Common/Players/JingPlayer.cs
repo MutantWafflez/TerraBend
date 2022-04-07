@@ -61,6 +61,21 @@ namespace TerraBend.Common.Players {
     /// </remarks>
     public class JingPlayer : ModPlayer {
         /// <summary>
+        /// Gets and returns the current Positive Jing value.
+        /// </summary>
+        public int PositiveJing => _positiveJing;
+
+        /// <summary>
+        /// Gets and returns the current Neutral Jing value.
+        /// </summary>
+        public int NeutralJing => _neutralJing;
+
+        /// <summary>
+        /// Gets and returns the current Negative Jing value.
+        /// </summary>
+        public int NegativeJing => _negativeJing;
+
+        /// <summary>
         /// The "amount" of Unaligned Jing current within the player's system. Remember that
         /// Unaligned Jing has no effects whatsoever.
         /// </summary>
@@ -156,35 +171,20 @@ namespace TerraBend.Common.Players {
         }
 
         /// <summary>
-        /// Gets and returns the current Positive Jing value.
-        /// </summary>
-        public int GetPositiveJing() => _positiveJing;
-
-        /// <summary>
-        /// Gets and returns the current Neutral Jing value.
-        /// </summary>
-        public int GetNeutralJing() => _neutralJing;
-
-        /// <summary>
-        /// Gets and returns the current Negative Jing value.
-        /// </summary>
-        public int GetNegativeJing() => _negativeJing;
-
-        /// <summary>
         /// Calculates and returns the current "Majority Type" of Jing.
         /// </summary>
-        public JingMajorityType GetMajorityJing() {
+        public JingType GetMajorityJing() {
             if (_positiveJing == _neutralJing && _positiveJing == _negativeJing && UnalignedJing == 0) {
-                return JingMajorityType.Balanced;
+                return JingType.Balanced;
             }
             else if (UnalignedJing > _positiveJing && UnalignedJing > _neutralJing && UnalignedJing > _negativeJing) {
-                return JingMajorityType.Unaligned;
+                return JingType.Unaligned;
             }
             else {
-                return new Tuple<JingMajorityType, int>[] {
-                        new Tuple<JingMajorityType, int>(JingMajorityType.Positive, _positiveJing),
-                        new Tuple<JingMajorityType, int>(JingMajorityType.Neutral, _neutralJing),
-                        new Tuple<JingMajorityType, int>(JingMajorityType.Negative, _negativeJing)
+                return new Tuple<JingType, int>[] {
+                        new Tuple<JingType, int>(JingType.Positive, _positiveJing),
+                        new Tuple<JingType, int>(JingType.Neutral, _neutralJing),
+                        new Tuple<JingType, int>(JingType.Negative, _negativeJing)
                     }.OrderByDescending(tuple => tuple.Item2)
                      .First()
                      .Item1;

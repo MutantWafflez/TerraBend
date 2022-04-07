@@ -46,5 +46,22 @@
 			TryingToEnterNonAlignedElement: "You must be an Avatar to use elements other than your alignment!"
 			TryingToEnterLockedElement: "You have yet to unlock the element of {0}!"
 		}
+
+		Configs: {
+			ClientSide: {
+				ConfigName: "Client Side"
+				PreferenceSettingsHeader: "Preferences"
+
+				PositiveJingColorLabel: "Positive Jing Color"
+				NeutralJingColorLabel: "Neutral Jing Color"
+				NegativeJingColorLabel: "Negative Jing Color"
+				UnalignedJingColorLabel: "Unaligned Jing Color"
+
+				PositiveJingColorTooltip: "Changes the color representation of \'Positive Jing\' in UIs and any other applicable places."
+				NeutralJingColorTooltip: "Changes the color representation of \'Neutral Jing\' in UIs and any other applicable places."
+				NegativeJingColorTooltip: "Changes the color representation of \'Negative Jing\' in UIs and any other applicable places."
+				UnalignedJingColorTooltip: "Changes the color representation of \'Unaligned Jing\' in UIs and any other applicable places."
+			}
+		}
 	}
 }
