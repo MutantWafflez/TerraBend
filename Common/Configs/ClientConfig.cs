@@ -26,7 +26,7 @@ namespace TerraBend.Common.Configs {
 
         [Label("$Mods.TerraBend.Configs.ClientSide.UnalignedJingColorLabel")]
         [Tooltip("$Mods.TerraBend.Configs.ClientSide.UnalignedJingColorTooltip")]
-        [DefaultValue(typeof(Color), "123, 123, 123, 255")]
+        [DefaultValue(typeof(Color), "255, 255, 255, 255")]
         public Color unalignedJingColor;
 
         public override ConfigScope Mode => ConfigScope.ClientSide;

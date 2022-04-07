@@ -28,7 +28,7 @@ namespace TerraBend.Content.UI.States {
             };
 
             backgroundElement = new DraggableElement() {
-                Left = new StyleDimension(Main.screenWidth * 0.78f, 0f),
+                Left = new StyleDimension(Main.screenWidth * 0.73f, 0f),
                 Top = new StyleDimension(20f, 0f),
                 Width = jingBar.Width,
                 Height = new StyleDimension(100f, 0f)

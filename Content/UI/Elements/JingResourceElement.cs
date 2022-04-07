@@ -43,21 +43,31 @@ namespace TerraBend.Content.UI.Elements {
 
             JingPlayer jingPlayer = Main.LocalPlayer.GetModPlayer<JingPlayer>();
             float middlePartCount = jingPlayer.MaxJing / _barSizeDenomination;
+            JingType majorityJing = jingPlayer.GetMajorityJing();
 
             CalculatedStyle dimensions = GetDimensions();
             Vector2 elementDrawPos = dimensions.Position();
             Vector2 edgeDims = new Vector2(_panelEdge.Width(), _panelEdge.Height());
             Vector2 middleDims = new Vector2(_panelMiddle.Width(), _panelMiddle.Height());
 
+            ClientConfig clientConfig = ModContent.GetInstance<ClientConfig>();
+            Color[] jingColors = new Color[] { clientConfig.positiveJingColor, clientConfig.neutralJingColor, clientConfig.negativeJingColor, clientConfig.unalignedJingColor };
+            Color borderColor = majorityJing == JingType.Balanced ? Main.DiscoColor : jingColors[(int)majorityJing];
+
             //Draw middle bar outlines
-            DrawBar(spriteBatch, elementDrawPos + new Vector2(edgeDims.X, 0f), middlePartCount, _panelMiddle);
+            DrawBar(spriteBatch,
+                elementDrawPos + new Vector2(edgeDims.X, 0f),
+                middlePartCount,
+                _panelMiddle,
+                borderColor
+            );
 
             //Draw bar edges
-            spriteBatch.Draw(_panelEdge.Value, elementDrawPos, Color.White);
+            spriteBatch.Draw(_panelEdge.Value, elementDrawPos, borderColor);
             spriteBatch.Draw(_panelEdge.Value,
                 new Rectangle((int)(elementDrawPos.X + edgeDims.X + middleDims.X * middlePartCount), (int)elementDrawPos.Y, (int)edgeDims.X, (int)edgeDims.Y),
                 null,
-                Color.White,
+                borderColor,
                 0f,
                 default,
                 SpriteEffects.FlipHorizontally,
@@ -69,9 +79,6 @@ namespace TerraBend.Content.UI.Elements {
             float neutralJingBars = jingPlayer.NeutralJing / _barSizeDenomination;
             float negativeJingBars = jingPlayer.NegativeJing / _barSizeDenomination;
             float unalignedJingBars = jingPlayer.UnalignedJing / _barSizeDenomination;
-            ClientConfig clientConfig = ModContent.GetInstance<ClientConfig>();
-            Color[] jingColors = new Color[] { clientConfig.positiveJingColor, clientConfig.neutralJingColor, clientConfig.negativeJingColor, clientConfig.unalignedJingColor };
-
             for (int i = 0; i < 4; i++) {
                 float[] jingBarCounts = new float[] { positiveJingBars, neutralJingBars, negativeJingBars, unalignedJingBars };
                 float totalBarCount = jingBarCounts.Take(i).Sum();
