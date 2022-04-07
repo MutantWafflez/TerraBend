@@ -101,6 +101,10 @@ namespace TerraBend.Common.Players {
         /// </summary>
         private int _negativeJing;
 
+        public override void UpdateDead() {
+            _positiveJing = _neutralJing = _negativeJing = 0;
+        }
+
         /// <summary>
         /// Adds the change value to Positive Jing. If the change value is negative, simply removes that much
         /// from the Positive Jing value. If positive however, first it tries to take

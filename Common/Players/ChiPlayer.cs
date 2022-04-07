@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -48,6 +49,10 @@ namespace TerraBend.Common.Players {
         public override void ResetEffects() {
             displayedMaxChi = baseMaxChi;
             currentChi = (int)MathHelper.Clamp(currentChi, 0f, displayedMaxChi);
+        }
+
+        public override void OnRespawn(Player player) {
+            currentChi = displayedMaxChi;
         }
 
         public override void Initialize() {
