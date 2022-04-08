@@ -44,15 +44,58 @@ namespace TerraBend.Common.Players {
         /// </summary>
         public int displayedMaxChi;
 
+        /// <summary>
+        /// This is how much Chi is regenerated over the time span of <seealso cref="chiRegenDenominator"/>.
+        /// Given normal circumstances, 1 Chi will regenerate every 3 seconds.
+        /// </summary>
+        public int chiRegenAmount;
+
+        /// <summary>
+        /// This is the amount of time, in TICKS, that must pass before <seealso cref="chiRegenAmount"/> is regenerated.
+        /// Given normal circumstances, this will be 180, or 3 seconds.
+        /// </summary>
+        public int chiRegenDenominator;
+
+        /// <summary>
+        /// The counter for Chi Regeneration. When this value passes <seealso cref="chiRegenDenominator"/>, Chi will regenerate.
+        /// </summary>
+        public int chiRegenCounter;
+
+        /// <summary>
+        /// The very default value of baseMaxChi. This is the value that new players start with.
+        /// </summary>
         public static readonly int DefaultMaxChi = 50;
+
+        /// <summary>
+        /// The default value of <seealso cref="chiRegenAmount"/>, given normal circumstances. It is reset to this
+        /// number every tick.
+        /// </summary>
+        public static readonly int DefaultChiRegenAmount = 1;
+
+        /// <summary>
+        /// The default value of <seealso cref="chiRegenDenominator"/>, given normal circumstances.
+        /// </summary>
+        public static readonly int DefaultChiRegenDenominator = 180;
 
         public override void ResetEffects() {
             displayedMaxChi = baseMaxChi;
             currentChi = (int)MathHelper.Clamp(currentChi, 0f, displayedMaxChi);
+
+            chiRegenAmount = DefaultChiRegenAmount;
+            chiRegenDenominator = DefaultChiRegenDenominator;
         }
 
         public override void OnRespawn(Player player) {
             currentChi = displayedMaxChi;
+        }
+
+        public override void UpdateLifeRegen() {
+            //Chi Regeneration handling
+            if (currentChi < displayedMaxChi && ++chiRegenCounter >= chiRegenDenominator) {
+                chiRegenCounter = 0;
+
+                currentChi += chiRegenAmount;
+            }
         }
 
         public override void Initialize() {
