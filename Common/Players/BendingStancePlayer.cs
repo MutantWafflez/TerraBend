@@ -85,8 +85,8 @@ namespace TerraBend.Common.Players {
         }
 
         public override void PreUpdate() {
-            //If a player opens a chest or has an item on their mouse, swap back to normal inventory
-            currentElementStance = Player.chest > -1 || !Main.mouseItem.IsAir ? null : currentElementStance;
+            //If a player has an item on their mouse, swap back to normal inventory
+            currentElementStance = !Main.mouseItem.IsAir ? null : currentElementStance;
         }
 
         public override void Initialize() {
