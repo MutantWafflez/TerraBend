@@ -1,13 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 using TerraBend.Common.MiscLoadables;
 using TerraBend.Common.Players;
 using TerraBend.Content.DamageClasses;
 using TerraBend.Custom.Enums;
 using TerraBend.Custom.Utils;
 using Terraria;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace TerraBend.Content.BendingMoves {
@@ -84,12 +85,6 @@ namespace TerraBend.Content.BendingMoves {
         }
 
         public override void ModifyTooltips(List<TooltipLine> tooltips) {
-            //Paint damage line to be the color of the element
-            TooltipLine vanillaDamageLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && tooltip.Name == "Damage");
-
-            if (vanillaDamageLine is not null) {
-                vanillaDamageLine.overrideColor = ElementColors.colors[BendingMoveType];
-            }
             //Remove the critical strike % line from vanilla (since bending moves by default cannot crit)
             TooltipLine vanillaCritLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && tooltip.Name == "CritChance");
             if (vanillaCritLine is not null) {
@@ -97,6 +92,7 @@ namespace TerraBend.Content.BendingMoves {
             }
 
             //Add Jing Creation tooltip, if applicable
+            TooltipLine vanillaDamageLine = tooltips.FirstOrDefault(tooltip => tooltip.mod == "Terraria" && tooltip.Name == "Damage");
             if (jingCreationType < JingType.Unaligned && jingCreationAmount > 0) {
                 TooltipLine jingCreationLine = new TooltipLine(Mod,
                     "JingCreation",
@@ -109,6 +105,21 @@ namespace TerraBend.Content.BendingMoves {
                 else {
                     tooltips.Add(jingCreationLine);
                 }
+            }
+
+            //Add Item Lore, if applicable
+            string itemLoreKey = $"Mods.TerraBend.ItemLore.{Name}";
+            if (Language.GetTextValue(itemLoreKey) is { } returnedValue && returnedValue != itemLoreKey) {
+                //If the player is not holding shift, then simply show a tooltip saying to do so if they wanna see lore
+                bool pressingShift = Keyboard.GetState().PressingShift();
+
+                TooltipLine lineToAdd = new TooltipLine(Mod, pressingShift ? "MoveLoreTip" : "OpenLoreTip", pressingShift ? returnedValue : LocalizationUtils.GetModTextValue("MiscTooltips.OpenLoreTip")) {
+                    overrideColor = pressingShift ? null : Color.Gray,
+                    isModifier = pressingShift,
+                    isModifierBad = pressingShift
+                };
+
+                tooltips.Add(lineToAdd);
             }
         }
     }
