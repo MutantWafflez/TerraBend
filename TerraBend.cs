@@ -15,5 +15,10 @@ namespace TerraBend {
                 #endif
             }
         }
+
+        /// <summary>
+        /// Directory of the Sprites for TerraBend.
+        /// </summary>
+        public static string SpritePath => nameof(TerraBend) + "/Assets/Sprites/";
     }
 }

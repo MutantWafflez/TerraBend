@@ -26,7 +26,7 @@ namespace TerraBend.Content.UI.Elements {
         private readonly float _barSizeDenomination = 25f;
 
         public ChiResourceElement() {
-            string chiPath = nameof(TerraBend) + "/Assets/Sprites/UI/ChiBar/";
+            string chiPath = TerraBend.SpritePath + "UI/ChiBar/";
 
             _frameEdge = ModContent.Request<Texture2D>(chiPath + "ChiFrameEdge", AssetRequestMode.ImmediateLoad);
             _frameMiddle = ModContent.Request<Texture2D>(chiPath + "ChiFrameMiddle", AssetRequestMode.ImmediateLoad);

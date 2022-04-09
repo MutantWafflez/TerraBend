@@ -27,7 +27,7 @@ namespace TerraBend.Content.UI.Elements {
         private readonly float _barSizeDenomination = 20f;
 
         public JingResourceElement() {
-            string jingPath = nameof(TerraBend) + "/Assets/Sprites/UI/JingPanel/";
+            string jingPath = TerraBend.SpritePath + "UI/JingPanel/";
 
             _panelEdge = ModContent.Request<Texture2D>(jingPath + "JingPanelEdge", AssetRequestMode.ImmediateLoad);
             _panelMiddle = ModContent.Request<Texture2D>(jingPath + "JingPanelMiddle", AssetRequestMode.ImmediateLoad);

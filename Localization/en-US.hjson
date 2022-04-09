@@ -29,6 +29,10 @@
 			Earth: "Enter/Exit Earth-bending Stance"
 		}
 
+		MiscKeybindInfo: {
+			JingPurge: "Attempt Jing Purge"
+		}
+
 		DamageClassName: {
 			BendingDamageClass: "bending damage"
 			FireDamageClass: "fire-bending damage"
@@ -54,6 +58,7 @@
 			EnteringBendingStanceWithItem: "You cannot enter a bending stance with an item in your hand!"
 			TryingToEnterNonAlignedElement: "You must be an Avatar to use elements other than your alignment!"
 			TryingToEnterLockedElement: "You have yet to unlock the element of {0}!"
+			TryingToPurgeUnalignedJing: "You cannot Jing Purge while {$Mods.TerraBend.FullJingName.Unaligned} is the majority!"
 		}
 
 		Configs: {
@@ -61,16 +66,28 @@
 				ConfigName: "Client Side"
 				PreferenceSettingsHeader: "Preferences"
 
-				PositiveJingColorLabel: "Positive Jing Color"
-				NeutralJingColorLabel: "Neutral Jing Color"
-				NegativeJingColorLabel: "Negative Jing Color"
-				UnalignedJingColorLabel: "Unaligned Jing Color"
+				PositiveJingColorLabel: "{$Mods.TerraBend.FullJingName.Positive} Color"
+				NeutralJingColorLabel: "{$Mods.TerraBend.FullJingName.Neutral} Color"
+				NegativeJingColorLabel: "{$Mods.TerraBend.FullJingName.Negative} Color"
+				UnalignedJingColorLabel: "{$Mods.TerraBend.FullJingName.Unaligned} Color"
 
 				PositiveJingColorTooltip: "Changes the color representation of \'{$Mods.TerraBend.FullJingName.Positive}\' in UIs and any other applicable places."
 				NeutralJingColorTooltip: "Changes the color representation of \'{$Mods.TerraBend.FullJingName.Neutral}\' in UIs and any other applicable places."
 				NegativeJingColorTooltip: "Changes the color representation of \'{$Mods.TerraBend.FullJingName.Negative}\' in UIs and any other applicable places."
 				UnalignedJingColorTooltip: "Changes the color representation of \'{$Mods.TerraBend.FullJingName.Unaligned}\' in UIs and any other applicable places."
 			}
+		}
+
+		BuffName: {
+			PositiveJingPurgeBuff: "{$Mods.TerraBend.FullJingName.Positive} Purge"
+			NeutralJingPurgeBuff: "{$Mods.TerraBend.FullJingName.Neutral} Purge"
+			NegativeJingPurgeBuff: "{$Mods.TerraBend.FullJingName.Negative} Purge"
+		}
+
+		BuffDescription: {
+			PositiveJingPurgeBuff: "Vastly increases potency of moves that generate {$Mods.TerraBend.FullJingName.Positive}"
+			NeutralJingPurgeBuff: "One-time ludicrous potency increase of the next move that generates {$Mods.TerraBend.FullJingName.Neutral}"
+			NegativeJingPurgeBuff: "Increases damage reduction"
 		}
 	}
 }

@@ -1,7 +1,14 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
+using TerraBend.Common.MiscLoadables;
+using TerraBend.Content.StatusEffects.Buffs;
 using TerraBend.Custom.Enums;
+using TerraBend.Custom.Utils;
+using Terraria;
+using Terraria.Audio;
+using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace TerraBend.Common.Players {
@@ -105,6 +112,12 @@ namespace TerraBend.Common.Players {
             _positiveJing = _neutralJing = _negativeJing = 0;
         }
 
+        public override void ProcessTriggers(TriggersSet triggersSet) {
+            if (MiscellaneousKeybinds.jingPurgeKeybind.JustPressed) {
+                AttemptJingPurge();
+            }
+        }
+
         /// <summary>
         /// Adds the change value to Positive Jing. If the change value is negative, simply removes that much
         /// from the Positive Jing value. If positive however, first it tries to take
@@ -195,8 +208,47 @@ namespace TerraBend.Common.Players {
             }
         }
 
+        /// <summary>
+        /// Attempts a Jing Purge on this player; see above remarks to see what happens based on what Jing is currently the majority.
+        /// Cannot Purge when Unaligned Jing is the majority.
+        /// </summary>
         public void AttemptJingPurge() {
-            //TODO: Write Jing Purge
+            JingType currentMajorityJing = GetMajorityJing();
+            //Do nothing & give warning if Unaligned is majority
+            if (currentMajorityJing == JingType.Unaligned) {
+                Main.NewText(LocalizationUtils.GetModTextValue("InfoText.TryingToPurgeUnalignedJing", Color.Yellow));
+
+                return;
+            }
+
+            //Give Buff(s)
+            switch (currentMajorityJing) {
+                case JingType.Positive:
+                    Player.AddBuff(ModContent.BuffType<PositiveJingPurgeBuff>(), 300);
+                    _positiveJing = 0;
+
+                    break;
+                case JingType.Neutral:
+                    Player.AddBuff(ModContent.BuffType<NeutralJingPurgeBuff>(), 30);
+                    _neutralJing = 0;
+
+                    break;
+                case JingType.Negative:
+                    Player.AddBuff(ModContent.BuffType<NegativeJingPurgeBuff>(), 360);
+                    _negativeJing = 0;
+
+                    break;
+                case JingType.Balanced:
+                    Player.AddBuff(ModContent.BuffType<PositiveJingPurgeBuff>(), 600);
+                    Player.AddBuff(ModContent.BuffType<NeutralJingPurgeBuff>(), 30);
+                    Player.AddBuff(ModContent.BuffType<NegativeJingPurgeBuff>(), 720);
+                    _positiveJing = _neutralJing = _negativeJing = 0;
+
+                    break;
+            }
+
+            //Play sound!
+            SoundEngine.PlaySound(SoundID.Item119);
         }
     }
 }
