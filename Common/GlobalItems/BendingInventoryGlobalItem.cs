@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using TerraBend.Common.Patches;
 using TerraBend.Content.BendingMoves;
 using TerraBend.Custom.Utils;
@@ -33,8 +32,7 @@ namespace TerraBend.Common.GlobalItems {
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
             // This line is here to show the player how to properly assign this weapon to the hotbar, if they otherwise don't know how
             TooltipLine hotbarAssignmentLine = new TooltipLine(Mod, "HotbarAssignmentLine", LocalizationUtils.GetModTextValue("MiscTooltips.HotbarAssignmentTip")) {
-                isModifier = true,
-                isModifierBad = true
+                isModifier = true
             };
 
             if (showHotbarTip) {

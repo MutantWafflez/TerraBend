@@ -51,7 +51,7 @@
 		MiscTooltips: {
 			HotbarAssignmentTip: "Press a hotbar keybind to place this move into said slot"
 			JingCreationTip: "Generates {0} {1}"
-			OpenLoreTip: "Hold SHIFT to see this move's lore"
+			OpenLoreTip: "Hold SHIFT to see this move's lore/trivia"
 		}
 
 		InfoText: {
@@ -99,9 +99,10 @@
 			LightningMove:
 				'''
 				In this move, a fire-bender generates an extremely deadly bolt of lightning that exits from the fingertips
-				The generated bolt instantly slays any non-boss entity (removes 9% max life for boss entities) and then dissapates
+				The bolt will instantly slay any non-boss entity (9% max life for boss entities) and then dissapate
 				Lightning is extremely volatile and requires balance in order to be safely bended
 				Attempting this move will backfire and instantly kill the bender unless Positive/Negative Jing are not within 5 Jing of each other
+				If the bender is successful, all Positive/Negative Jing will be removed & replaced with Unaligned Jing
 				'''
 		}
 

@@ -54,7 +54,7 @@ namespace TerraBend.Common.Systems {
         public override void UpdateUI(GameTime gameTime) {
             _lastGameTime = gameTime;
             if (_lastGameTime is not null && correspondingInterface.CurrentState == correspondingUIState) {
-                correspondingUIState.Update(_lastGameTime);
+                correspondingInterface.Update(_lastGameTime);
             }
         }
     }
